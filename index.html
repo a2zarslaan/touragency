@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/icon-font.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+
+    <title>Natours | Exciting tours for adventurous people</title>
+  </head>
+  <body>
+    <header class="header">
+      <!-- it's a good practise to add the images inside a div and then style the dic as far as position and stuff is concerned, because images being an inline element are generally difficult to handle on their own, add them in a container is the best practice. -->
+      <div class="logo-box">
+        <img src="img/logo-white.png" alt="Logo" class="logo" />
+      </div>
+
+      <div class="text-box">
+        <!-- h1 is the most important single heading for your page, not just design wise, but also for the SEO as google looks at the h1. So we cannot just use a single word as it will mess up the indexing, and we cannot show a whole phrase as a large heading. So we'll include our value proposition in h1 and use span tag to make text portions bigger and smaller -->
+        <h1 class="heading-primary">
+          <span class="heading-primary-main">outdoors</span>
+          <span class="heading-primary-sub">is where life happens</span>
+        </h1>
+
+        <a href="#" class="btn btn-white btn-animated">Discover our tours</a>
+      </div>
+    </header>
+  </body>
+</html>
