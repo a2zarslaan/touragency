@@ -231,4 +231,7 @@ body {
 .btn-animated {
   /* 0.75 is the delay */
   animation: moveInButton 0.5s ease-out 0.75s;
+
+  /* the button would be visible by default before showing any movement, but we won't like it , so to prevent it we will use a property called animation-fill-mode: backwards. What it does is, that it assigns the moveInButton's 0% animation property by default to the button so that its opacity is zero */
+  animation-fill-mode: backwards;
 }
