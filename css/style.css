@@ -5,22 +5,36 @@ Medium green: #55c57a
 Dark green: #28b485
 */
 
-* {
-  /* normalising the css using cross browser reset, that is, resetting the page to be viewed the same in all browsers. This is because browsers sometimes apply some default margin and heading to elements which we don't want*/
+/* adding the normalising properties to the ::before and ::after pseudo elements too as we are using them in our code and do not want any unexpected behavior. That's why we're normalising everything now */
+*,
+*::before,
+*::after {
+  /* normalising the css using cross browser reset, that is, resetting the page to be viewed the same in all browsers. This is because browsers sometimes apply some default margin and heading to elements which we don't want. We can also usea library's to do this or do it manually like this*/
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* prevents padding and borders to be added to the total height or width of the box */
+
+  /* use inheritance whereever possible */
+  box-sizing: inherit;
+}
+
+html {
+  /* using % is a better practice than using hardcoded pixels, 62.5% because 10 is 62.5% of 16px, which was the default font-size in the browser */
+  font-size: 62.5%;
+  /* also, we'll use rem inside this stylesheet instead of px everywhere because rem is relative to the root font size defined above, so it is very easy to change the font size when we want to adjust it or for responsive beahvior and smaller font size there. Also, we could have used em instead of rem, but that also considers size of parent elements font in addition to the root element's font, and it would require much more copmplicated calculations. Rem is very much straightforward compared to that hence we'll be using it */
 }
 
 body {
   /* font is best handled in the body tag, it is the best practice */
   font-family: "Lato", sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  /* font-size: 16px; */
   line-height: 1.7;
   color: #777;
   /* this is to make a white border around the whole webpage */
-  padding: 30px;
+  padding: 3rem;
+
+  /* prevents padding and borders(not margin) to be added to the total height or width of the box. Thus the element doesn't appear any bigger than it should be */
+  box-sizing: border-box;
 }
 
 .header {
@@ -31,10 +45,10 @@ body {
     url(../img/hero.jpg);
   /* tell the browser that the size of the image is cover so that there is no tiling */
   background-size: cover;
-  /* tells the browser what part of the image to keep in the frame when the screen size changes, can be yop, bottom and center */
+  /* tells the browser what part of the image to keep in the frame when the screen size changes, can be top, bottom and center */
   background-position: top;
 
-  /* the slanted triangle at the bottom right of the header can be achieved by using clip-path, which is a new and advanced feature of css. We'll spacific the 4 corners as parameters of the points in the window that we want to keep visible. In the case below we will use vh(viewport height) instead of percentage, so that the height will be adjusted based on the height of the viewport. There is an online solution to create complicated clip paths, check out https://bennettfeely.com/clippy, and just copy paste the parameters of the clip-path property*/
+  /* the slanted triangle at the bottom right of the header can be achieved by using clip-path, which is a new and advanced feature of css. We'll spacify the 4 corners as parameters of the points in the window that we want to keep visible. In the case below we will use vh(viewport height) instead of percentage, so that the height will be adjusted based on the height of the viewport. There is an online solution to create complicated clip paths, check out https://bennettfeely.com/clippy, and just copy paste the parameters of the clip-path property*/
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   position: relative;
 }
@@ -42,13 +56,13 @@ body {
 .logo-box {
   /* to find out the exact position of this element in the page, it needs to have a parent element whose position is relative, and that acts as a reference point for this element's position */
   position: absolute;
-  top: 40px;
-  left: 40px;
+  top: 4rem;
+  left: 4rem;
 }
 
 .logo {
   /* we can set the height and the browser will figure out the width, and vice versa, it is better to use height though */
-  height: 35px;
+  height: 3.5rem;
 }
 
 .logo:hover {
@@ -75,15 +89,15 @@ body {
 
   /* the animations we're using below are jittery sometimes, no one knows why this happens, but there is a fix for it, and that is by using the following command. It is however, used to hide the back part of the elements and is not meant for this purpose, but it works and stops the jitters so we use it */
   backface-visibility: hidden;
-  margin-bottom: 60px;
+  margin-bottom: 6rem;
 }
 
 .heading-primary-main {
   /* we set display as block to get have this element have the whole line for itlself, as span is inline by default */
   display: block;
-  font-size: 60px;
+  font-size: 6rem;
   font-weight: 700;
-  letter-spacing: 35px;
+  letter-spacing: 3.5rem;
 
   /* for the animation to work (the one shown in moveInLeft), we need to specify only two properties in the element's css specifically, and they are animation name and duration as shown below */
   animation-name: moveInLeft;
@@ -104,9 +118,9 @@ body {
 
 .heading-primary-sub {
   display: block;
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 400;
-  letter-spacing: 17.4px;
+  letter-spacing: 1.74rem;
   animation: moveInRight 0.85s ease-out;
 }
 
@@ -116,12 +130,12 @@ body {
   /* these percentages are there to instruct the browser to act in a certain way when the animation is 0, 80 and 100% done. For the best performance it is best to animate only two properties. We will be using opacity and transform properties. That's what the borwsers are optimised for. However, you can go really crazy with animations, can add rotations to transforms  and stuff. Look it up */
   0% {
     opacity: 0;
-    transform: translate(-100px);
+    transform: translate(-10rem);
   }
 
   80% {
     /* we are adding slight positive x translation to the element at 80% value so that it creates a slight bouncy effect */
-    transform: translate(10px);
+    transform: translate(1rem);
   }
 
   100% {
@@ -134,11 +148,11 @@ body {
   /* another function for the .heading-primary-sub */
   0% {
     opacity: 0;
-    transform: translate(100px);
+    transform: translate(10rem);
   }
 
   80% {
-    transform: translate(-10px);
+    transform: translate(-1rem);
   }
 
   100% {
@@ -151,23 +165,24 @@ body {
 .btn:visited {
   text-transform: uppercase;
   text-decoration: none;
-  padding: 15px 40px;
+  padding: 1.5rem 4rem;
   /* The button will overlap on surrounding elements because it is an inline element by default, that is because it is just text. To handle that, we will convert the button to inline-block so that it has it is treated as a block by the browser  */
   display: inline-block;
   /* to place the button in the center of the screen, using absolute positioning or transforms would be an overkill. Since this is a button and with text, we can actually use text-align on it an it will work fine, check it is done above in text-box class */
   /* to make the button round */
-  border-radius: 100px;
+  border-radius: 10rem;
 
   /* as mentioned in the last lecture, there are 2 types of animations, one is transition and the other is by defining a method. We saw the latter in the previous lectures, now we'll use the former. The transition proprerty below is a shorthand like animation property. It involves parameters from several separate properties clubbed together. Also, transition is specified for the initial state of the element */
   transition: all 0.2s;
 
   /* for the pseudo element virtual buton, we'll have to set the positioning of this element */
   position: relative;
+  font-size: 1.2rem;
 }
 
 .btn:hover {
   /* :hover pseudo class gets activated when we hover the pointer over the element. In css, the y axis moves top to bottom, so to move up, we have to translate in a negative direction */
-  transform: translateY(-3px);
+  transform: translateY(-0.3rem);
 
   /* box-shadow can take several parameters - 1st parameter - x offset, 2nd - y offset, 3rd - blur intensity, 4th - color and transparency in rgba */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -175,10 +190,10 @@ body {
 
 .btn:active {
   /* this pseudo class gets activated when we click on the element, this is generally used to create the push back effect when a button is pressed */
-  transform: translate(-1px);
+  transform: translate(-0.1rem);
 
   /* shadow smaller and less blurred to create an illusion of movement */
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
 .btn-white {
@@ -195,7 +210,7 @@ body {
   /* the virtual button will be treated as the child of the real button, so the height and width, even when 100% will be equal to the height and width of the real button */
   height: 100%;
   width: 100%;
-  border-radius: 100px;
+  border-radius: 10rem;
 
   /* for an element to have absolute positioning, it needs to have an element with relative positioning nearby. It will find the nearest element with relative positioning for reference of its own position */
   position: absolute;
