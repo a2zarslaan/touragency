@@ -5,6 +5,7 @@ Medium green: #55c57a
 Dark green: #28b485
 */
 
+
 /* adding the normalising properties to the ::before and ::after pseudo elements too as we are using them in our code and do not want any unexpected behavior. That's why we're normalising everything now */
 *,
 *::before,
