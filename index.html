@@ -13,23 +13,27 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
 
-    <title>Natours | Exciting tours for adventurous people</title>
+    <title>Nature Tours | CSS Concept Site</title>
   </head>
   <body>
     <header class="header">
-      <!-- it's a good practise to add the images inside a div and then style the dic as far as position and stuff is concerned, because images being an inline element are generally difficult to handle on their own, add them in a container is the best practice. -->
-      <div class="logo-box">
-        <img src="img/logo-white.png" alt="Logo" class="logo" />
+      <!-- it's a good practise to add the images inside a div and then style the div as far as position and stuff is concerned, because images being an inline element are generally difficult to handle on their own, add them in a container is the best practice. -->
+      <div class="header__logo-box">
+        <!-- we're adding the BEM model to this project, so header will be the block here, as it makes sense as a standalone componenet. logo-box however, is an element as it doesn't make sense outside of the header block, as a standalone component. Thus we represent it with header__logo-box  -->
+        <img src="img/logo-white.png" alt="Logo" class="header__logo" />
       </div>
 
-      <div class="text-box">
+      <!-- header__text-box is also an element of header block -->
+      <div class="header__text-box">
         <!-- h1 is the most important single heading for your page, not just design wise, but also for the SEO as google looks at the h1. So we cannot just use a single word as it will mess up the indexing, and we cannot show a whole phrase as a large heading. So we'll include our value proposition in h1 and use span tag to make text portions bigger and smaller -->
         <h1 class="heading-primary">
-          <span class="heading-primary-main">outdoors</span>
-          <span class="heading-primary-sub">is where life happens</span>
+          <!-- main and sub classes as shown below are modifiers according to BEM as they are different versions of the same thing. They are represented with two hephens(--) -->
+          <span class="heading-primary--main">outdoors</span>
+          <span class="heading-primary--sub">is where life happens</span>
         </h1>
 
-        <a href="#" class="btn btn-white btn-animated">Discover our tours</a>
+        <!-- btn is a standalone component, so a block, btn-white and animated are modifiers of the same thing, so they are modifiers -->
+        <a href="#" class="btn btn--white btn--animated">Discover our tours</a>
       </div>
     </header>
   </body>

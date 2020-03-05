@@ -53,24 +53,24 @@ body {
   position: relative;
 }
 
-.logo-box {
+.header__logo-box {
   /* to find out the exact position of this element in the page, it needs to have a parent element whose position is relative, and that acts as a reference point for this element's position */
   position: absolute;
   top: 4rem;
   left: 4rem;
 }
 
-.logo {
+.header__logo {
   /* we can set the height and the browser will figure out the width, and vice versa, it is better to use height though */
   height: 3.5rem;
 }
 
-.logo:hover {
+.header__logo:hover {
   /* we can define keyframe animation once and then reuse it at multiple places */
   animation: moveInRight 0.85s ease-out;
 }
 
-.text-box {
+.header__text-box {
   /* it is good to follow the natural order of HTML while styling the elements, to prevent confusion */
   position: absolute;
   /* the two properties below top and left will position the div in such a way that the starting of the div is at the center both horizontally and vertically, however, we want the center of the box to be at the center. Unifortunately, there seems to be no built in method to do that in css, but we can just use these two commands and then translate the box 50% to the left and 50% upwards, relative to its own position so that the center is in the middle as desired */
@@ -92,7 +92,7 @@ body {
   margin-bottom: 6rem;
 }
 
-.heading-primary-main {
+.heading-primary--main {
   /* we set display as block to get have this element have the whole line for itlself, as span is inline by default */
   display: block;
   font-size: 6rem;
@@ -116,7 +116,7 @@ body {
   animation: moveInLeft 0.85s ease-out; */
 }
 
-.heading-primary-sub {
+.heading-primary--sub {
   display: block;
   font-size: 2rem;
   font-weight: 400;
@@ -196,7 +196,7 @@ body {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
-.btn-white {
+.btn--white {
   background-color: #fff;
   color: #777;
 }
@@ -220,7 +220,7 @@ body {
   transition: all 0.4s;
 }
 
-.btn-white::after {
+.btn--white::after {
   background-color: #fff;
 }
 
@@ -243,7 +243,7 @@ body {
   }
 }
 
-.btn-animated {
+.btn--animated {
   /* 0.75 is the delay */
   animation: moveInButton 0.5s ease-out 0.75s;
 
