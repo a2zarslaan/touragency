@@ -43,3 +43,48 @@
 
   /* there are 2 types of animations in css. The first one is easier, and it uses the transition property, and then change the properties whenever we want to animate the element, for eg while hovering. The second method uses keyframes and is shown below. */
 }
+
+//heading secondary inside head partial
+.heading-secondary {
+  font-size: 3.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+
+  //setting display to inline block because otherwise the gradient would be the background of the whole block
+  display: inline-block;
+  //setting a gradient inside the text
+  background-image: linear-gradient(
+    to right,
+    $color-primary-light,
+    $color-primary-dark
+  );
+
+  //to make the background gradient appear only inside the text, we'll use a new CSS property, called webkit background clip
+  -webkit-background-clip: text;
+  //now the clipped text would be visible only behind the text, so we'd have to make the text transparent to be able to see the gradient
+  color: transparent;
+  letter-spacing: 0.2rem;
+  transition: all 0.2s;
+
+  //adding animation on hover
+  &:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: 0.5rem 1rem 2rem rgba($color-black, $alpha: 0.2);
+  }
+}
+
+//styles for the tertiary heading and paragraphs in the about section
+.heading-tertiary {
+  font-size: $default-font-size;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.paragraph {
+  font-size: $default-font-size;
+
+  //giving some space to paragraphs using margin-bottm, except for the last element
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+}

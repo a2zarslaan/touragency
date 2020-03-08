@@ -78,3 +78,31 @@
     animation-fill-mode: backwards;
   }
 }
+
+.btn-text {
+  &:link,
+  &:visited {
+    //replacing default font size by a variable
+    font-size: $default-font-size;
+    color: $color-primary;
+    display: inline-block;
+    text-decoration: none;
+
+    //for very small units like the ones below, we don't need to use rem as it doesn't really make a lot of difference, and we'll be having minimal changes even if we use rem and scale. So it's okay to use pixels here
+    border-bottom: 1px solid $color-primary;
+    padding: 3px;
+    transition: all 0.2s;
+  }
+
+  &:hover {
+    background-color: $color-primary;
+    color: $color-white;
+    box-shadow: 0 1rem 2rem rgba($color-black, $alpha: 0.15);
+    transform: translate(-2px);
+  }
+
+  &:active {
+    box-shadow: 0 1rem 2rem rgba($color-black, $alpha: 0.15);
+    transform: translate(0);
+  }
+}

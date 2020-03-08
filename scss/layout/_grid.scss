@@ -2,7 +2,8 @@
   //1140 pixels width is the standard, we are writing it out using rem and the root element size is 10, hence dividing the pixel size by root font size to get rem value
   max-width: $grid-width; //further, we are using max-width instead of width because the way max-width works is, that if we have enough width, that is, bigger than 114rem, then the element will have as much width as specified here. However, if the window is smaller than the element's max width, the element will take up 100% of the width of the window.
 
-  background-color: #eee;
+  //removing colors in the final usable grid version
+  //background-color: #eee;
 
   //now we want to center the element, so we'll use the trick everyone uses to center a block element inside another block element, and that is as follows -
   margin: 0 auto;
@@ -29,7 +30,8 @@
   // }
 
   [class^="col-"] {
-    background-color: orangered;
+    //removing colors in the final usable grid version
+    //background-color: orangered;
     float: left;
 
     //adding right margin to all columns (so that gutters are visible), expect for the last child

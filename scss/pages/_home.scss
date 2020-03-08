@@ -1,0 +1,8 @@
+//we're putting this section in home because we won't have about section anywhere else in our code.
+.section-about {
+  background-color: $color-grey-light-1;
+
+  //the reason we're setting these weird margins and paddings is because the traingle made using clip-path has a white background but other contents of our site have a grey background. to make the background under that triangle wedge as grey as well, we'll just add top and bottom padding to our about section, and then give it a -20vh margin to move it upwards. Why -20vh? Because if you look carefully at the code for the clip path, the header takes 95vh height, and the clip path takes 75vh height, the difference between the two is the height of the white area and that's what we're trying to hide.
+  padding: 25rem 0;
+  margin-top: -20vh;
+}

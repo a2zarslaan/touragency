@@ -1,0 +1,48 @@
+.composition {
+  position: relative;
+  &__photo {
+    width: 55%;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, $alpha: 0.4);
+    border-radius: 2px;
+
+    //this absolute position will be with reference to the position of composition above. To be precise, it'll take as reference the top left corner of the coposition
+    position: absolute;
+
+    //setting a default z index so that the zoom on hover effect can be created
+    z-index: 10;
+
+    //the following is done to make the transition appear smoother
+    transition: all 0.2s;
+
+    //adding an offset to the outline to create the frame effect
+    outline-offset: 2rem;
+
+    &--p1 {
+      left: -10%;
+      top: -2rem;
+    }
+    &--p2 {
+      left: 30%;
+      top: 3rem;
+    }
+    &--p3 {
+      left: 10%;
+      top: 10rem;
+    }
+
+    &:hover {
+      //to create the border like frame around the image when we hover, we'll use a lesser known CSS property called outline. It works like a border, but there is a difference, that is, and outline can have an offset, while the border cannot. Hence we're using outline here
+      outline: 1.5rem solid $color-primary;
+      transform: scale(1.05) translateY(-0.5rem);
+      box-shadow: 0 1.5rem 4rem rgba($color-black, $alpha: 0.5);
+
+      //setting a bigger z index than the default one so that the images pop on top as soon as we hover
+      z-index: 20;
+    }
+  }
+
+  //now we want to scale the images that are not hovered at to be a smaller size. We can do it by applying the hover not on the composition itself
+  &:hover &__photo:not(:hover) {
+    transform: scale(0.85);
+  }
+}

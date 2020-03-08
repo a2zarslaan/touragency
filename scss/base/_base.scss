@@ -13,7 +13,7 @@
 }
 
 html {
-  /* using % is a better practice than using hardcoded pixels, 62.5% because 10 is 62.5% of 16px, which was the default font-size in the browser */
+  /* using % is a better practice than using hardcoded pixels, 62.5% because 10 is 62.5% of 16px, which was the default font-size in the browser. This property defines what 1 rem is inside the document */
   font-size: 62.5%;
   /* also, we'll use rem inside this stylesheet instead of px everywhere because rem is relative to the root font size defined above, so it is very easy to change the font size when we want to adjust it or for responsive beahvior and smaller font size there. Also, we could have used em instead of rem, but that also considers size of parent elements font in addition to the root element's font, and it would require much more copmplicated calculations. Rem is very much straightforward compared to that hence we'll be using it */
 }

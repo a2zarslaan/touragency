@@ -103,4 +103,50 @@
       </div>
     </div> -->
 
+    <main>
+      <section class="section-about">
+        <!-- to center this text below, we'll wrap it up in a div and then center the elements inside the div. We'll use something called utility classes. Utility classes are very simple classes in CSS which have very simple goal - To perform one task. In this case, the goal would simply be to center the text  -->
+        <div class="u-center-text u-margin-bottom-big">
+          <h2 class="heading-secondary">
+            <!-- we'll put styles for this inside the home partial as these styles are for the homepage -->
+            Exciting Tours for Adventurous People
+          </h2>
+        </div>
+        <div class="row">
+          <div class="col-1-of-2">
+
+            <!-- heading-tertiary and paragraph are not components but typography so they're going into typography partial -->
+            <!-- creating another utility class to give bottom margin to heading -->
+            <h3 class="heading-tertiary u-margin-bottom-small">
+              You're going to fall in love with nature
+            </h3>
+            <p class="paragraph">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti dignissimos sunt nesciunt exercitationem rem praesentium molestiae nam, eaque commodi alias, illo perferendis asperiores perspiciatis. Eos maiores reprehenderit molestiae rerum maxime?
+            </p>
+
+            <h3 class="heading-tertiary u-margin-bottom-small">
+              Live adventures like you never have before
+            </h3>
+            <p class="paragraph">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti dignissimos sunt nesciunt exercitationem rem praesentium molestiae nam, eaque commodi alias, illo perferendis asperiores perspiciatis. Eos maiores reprehenderit molestiae rerum maxime?
+            </p>
+
+            <!-- &rarr; is the shortcut for creating an arrow -->
+            <!-- styles for btn-text will be in buttons partial -->
+            <a href="#" class="btn-text">Learn More &rarr;</a>
+          </div>
+          <div class="col-1-of-2">
+            <!-- creating a new partial in components called composition to style the following -->
+            <div class="composition">
+              <img src="img/nat-1-large.jpg" alt="Photo 1" class="composition__photo composition__photo--p1">
+              <img src="img/nat-2-large.jpg" alt="Photo 2" class="composition__photo composition__photo--p2">
+              <img src="img/nat-3-large.jpg" alt="Photo 3" class="composition__photo composition__photo--p3">
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+    </main>
+
 </html>
