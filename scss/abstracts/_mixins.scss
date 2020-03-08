@@ -1,0 +1,8 @@
+//creating a clearfix mixin to handle the collapsing elements where all child elements are floating
+@mixin clearfix {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

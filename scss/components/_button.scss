@@ -1,0 +1,80 @@
+/*button is an independent component and can be reused anywhere in the project, hence placing it here*/
+
+.btn {
+  &:link,
+  &:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1.5rem 4rem;
+    /* The button will overlap on surrounding elements because it is an inline element by default, that is because it is just text. To handle that, we will convert the button to inline-block so that it has it is treated as a block by the browser  */
+    display: inline-block;
+    /* to place the button in the center of the screen, using absolute positioning or transforms would be an overkill. Since this is a button and with text, we can actually use text-align on it an it will work fine, check it is done above in text-box class */
+    /* to make the button round */
+    border-radius: 10rem;
+
+    /* as mentioned in the last lecture, there are 2 types of animations, one is transition and the other is by defining a method. We saw the latter in the previous lectures, now we'll use the former. The transition proprerty below is a shorthand like animation property. It involves parameters from several separate properties clubbed together. Also, transition is specified for the initial state of the element */
+    transition: all 0.2s;
+
+    /* for the pseudo element virtual buton, we'll have to set the positioning of this element */
+    position: relative;
+    font-size: 1.2rem;
+  }
+
+  &:hover {
+    /* :hover pseudo class gets activated when we hover the pointer over the element. In css, the y axis moves top to bottom, so to move up, we have to translate in a negative direction */
+    transform: translateY(-0.3rem);
+
+    /* box-shadow can take several parameters - 1st parameter - x offset, 2nd - y offset, 3rd - blur intensity, 4th - color and transparency in rgba */
+    box-shadow: 0 10px 20px rgba($color-black, 0.2);
+
+    /* ::after virtual button is visible only when we hover over the button  */
+    &::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0;
+    }
+  }
+
+  &:active {
+    /* this pseudo class gets activated when we click on the element, this is generally used to create the push back effect when a button is pressed */
+    transform: translate(-0.1rem);
+
+    /* shadow smaller and less blurred to create an illusion of movement */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  }
+
+  &--white {
+    background-color: $color-white;
+    color: $color-grey-dark;
+
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
+  /* to create the button zoom in effect, we'll use the ::after pseudo element, that we'll use to create a virtual button after the real button to show that effect */
+
+  &::after {
+    /* content is important for ::after to run. It can be empty bnut it needs ot be there */
+    content: "";
+    display: inline-block;
+    /* the virtual button will be treated as the child of the real button, so the height and width, even when 100% will be equal to the height and width of the real button */
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+
+    /* for an element to have absolute positioning, it needs to have an element with relative positioning nearby. It will find the nearest element with relative positioning for reference of its own position */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all 0.4s;
+  }
+
+  &--animated {
+    /* 0.75 is the delay */
+    animation: moveInButton 0.5s ease-out 0.75s;
+
+    /* the button would be visible by default before showing any movement, but we won't like it , so to prevent it we will use a property called animation-fill-mode: backwards. What it does is, that it assigns the moveInButton's 0% animation property by default to the button so that its opacity is zero */
+    animation-fill-mode: backwards;
+  }
+}

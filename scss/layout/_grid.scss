@@ -1,0 +1,75 @@
+.row {
+  //1140 pixels width is the standard, we are writing it out using rem and the root element size is 10, hence dividing the pixel size by root font size to get rem value
+  max-width: $grid-width; //further, we are using max-width instead of width because the way max-width works is, that if we have enough width, that is, bigger than 114rem, then the element will have as much width as specified here. However, if the window is smaller than the element's max width, the element will take up 100% of the width of the window.
+
+  background-color: #eee;
+
+  //now we want to center the element, so we'll use the trick everyone uses to center a block element inside another block element, and that is as follows -
+  margin: 0 auto;
+
+  //here is a good opportunity to use the not keyword, basically, it selects everything except for the elements satisfying the condition passed to it. What we want to achieve though is that the last element should not have a margin-bottom like all other elements, as it doesn't look good that way. So to remove the margin of the last child, generally we would have selected the last child pseudo-class and set the margin-bottom for it to 0. But here we are doing the same thing but the other way round.
+  &:not(:last-child) {
+    margin-bottom: $gutter-vertical;
+  }
+
+  // [class=]{
+  //   selects all elements having this class
+  // }
+
+  // [class^=col-1]{
+  //   selects all elements having class name starting with col-1
+  // }
+
+  // [class*=]{
+  //   selects all elements having class name containing col-1 anywhere
+  // }
+
+  // [class$=]{
+  //   selects all elements having class name ending with col-1
+  // }
+
+  [class^="col-"] {
+    background-color: orangered;
+    float: left;
+
+    //adding right margin to all columns (so that gutters are visible), expect for the last child
+    &:not(:last-child) {
+      margin-right: $gutter-horizontal;
+    }
+  }
+
+  //now the row element will collapse as all its children (columns) are floating, so we'll write a clearfix mixin and include it here.
+  @include clearfix;
+
+  //now we'll define the CSS for the grid system. We will be using mathematical formulaue to determine the column width. For this, we'll use a powerful CSS function called cacl(). There's a calc with SCSS too, but it is not as powerful because it doesn't allow us to mix the units of measurement in the calculations, while the default CSS compiler does. Further, to use SASS variables inside the calc function, we need to wrap them around curly brackets with a hashtag at the beginning, like this - #{}
+  .col-1-of-2 {
+    width: calc((100% - #{$gutter-horizontal}) / 2);
+  }
+
+  //here most of the code is similar to the code for col-1-of-2, and we're using DRY principles, so we'll find a way to not repeat this code. Mixins son't make much sense here either. So for that we can use something called attribute selector. We could have added a class called col to all these elements and it would have given us the same results, but now it is too much work so we'll just use this. It is shown above col-1-of-2 class
+  .col-1-of-3 {
+    width: calc((100% - 2 *#{$gutter-horizontal}) / 3);
+  }
+
+  //width of the following column would be 2*(width of 1-of-3) + gutter-horizontal
+  .col-2-of-3 {
+    width: calc(
+      2 * ((100% - 2 *#{$gutter-horizontal}) / 3) + #{$gutter-horizontal}
+    );
+  }
+  .col-1-of-4 {
+    width: calc((100% - 3 *#{$gutter-horizontal}) / 4);
+  }
+
+  .col-2-of-4 {
+    width: calc(
+      2 * ((100% - 3 *#{$gutter-horizontal}) / 4) + #{$gutter-horizontal}
+    );
+  }
+
+  .col-3-of-4 {
+    width: calc(
+      3 * ((100% - 3 *#{$gutter-horizontal}) / 4) + 2 *#{$gutter-horizontal}
+    );
+  }
+}

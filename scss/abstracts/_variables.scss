@@ -1,0 +1,22 @@
+/*placing the variables in the relevant file*/
+
+/*
+COLORS:
+Light green: #7ed56f
+Medium green: #55c57a
+Dark green: #28b485
+*/
+
+//integrating SCSS and converting the CSS, changing colors to variables
+$color-primary: #7ed56f;
+$color-primary-light: #55c57a;
+$color-primary-dark: #28b485;
+
+$color-grey-dark: #777;
+$color-white: #fff;
+$color-black: #000;
+
+//assigning the variables for the _grid partial
+$grid-width: 114em;
+$gutter-vertical: 8rem;
+$gutter-horizontal: 6em;

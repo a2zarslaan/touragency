@@ -1,0 +1,90 @@
+/*placing the header as a layout element*/
+
+.header {
+  /* height of the header should be 95% of the viewport height at all times */
+  height: 95vh;
+  /* two bg images, the first is the linear gradient with color values, the second is the actual bg image */
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(../img/hero.jpg);
+  /* tell the browser that the size of the image is cover so that there is no tiling */
+  background-size: cover;
+  /* tells the browser what part of the image to keep in the frame when the screen size changes, can be top, bottom and center */
+  background-position: top;
+
+  /* the slanted triangle at the bottom right of the header can be achieved by using clip-path, which is a new and advanced feature of css. We'll spacify the 4 corners as parameters of the points in the window that we want to keep visible. In the case below we will use vh(viewport height) instead of percentage, so that the height will be adjusted based on the height of the viewport. There is an online solution to create complicated clip paths, check out https://bennettfeely.com/clippy, and just copy paste the parameters of the clip-path property*/
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  position: relative;
+
+  /* Now since we are following BEM model to structure our code as visible below, we can leverage the '&' sign feature of SCSS to replace the class names which originally used to be written separately. We can now write them together. inside the header class. Check the major chunk of commented out code below to understand */
+
+  &__logo-box {
+    //to find out the exact position of this element in the page, it needs to have a parent element whose position is relative, and that acts as a reference point for this element's position
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo {
+    //we can set the height and the browser will figure out the width, and vice versa, it is better to use height though
+    height: 3.5rem;
+  }
+
+  &__logo:hover {
+    // we can define keyframe animation once and then reuse it at multiple places
+    animation: moveInRight 0.85s ease-out;
+  }
+
+  &__text-box {
+    //it is good to follow the natural order of HTML while styling the elements, to prevent confusion
+    position: absolute;
+    //the two properties below top and left will position the div in such a way that the starting of the div is at the center both horizontally and vertically, however, we want the center of the box to be at the center. Unifortunately, there seems to be no built in method to do that in css, but we can just use these two commands and then translate the box 50% to the left and 50% upwards, relative to its own position so that the center is in the middle as desired
+
+    //setting the top displacement to be 40% now as the heading looked like its more towards the bottom due to the clip-path triangle at the bottom. Also, these 40% and 50% are in relation to the parent element, but the translation is wrt the element itself
+    top: 40%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    text-align: center;
+  }
+}
+
+/*
+.header__logo-box {
+  //to find out the exact position of this element in the page, it needs to have a parent element whose position is relative, and that acts as a reference point for this element's position 
+  position: absolute;
+  top: 4rem;
+  left: 4rem;
+}
+
+
+
+.header__logo {
+  //we can set the height and the browser will figure out the width, and vice versa, it is better to use height though 
+  height: 3.5rem;
+}
+
+.header__logo:hover {
+  // we can define keyframe animation once and then reuse it at multiple places
+  animation: moveInRight 0.85s ease-out;
+}
+
+.header__text-box {
+  //it is good to follow the natural order of HTML while styling the elements, to prevent confusion 
+  position: absolute;
+  //the two properties below top and left will position the div in such a way that the starting of the div is at the center both horizontally and vertically, however, we want the center of the box to be at the center. Unifortunately, there seems to be no built in method to do that in css, but we can just use these two commands and then translate the box 50% to the left and 50% upwards, relative to its own position so that the center is in the middle as desired 
+
+  //setting the top displacement to be 40% now as the heading looked like its more towards the bottom due to the clip-path triangle at the bottom. Also, these 40% and 50% are in relation to the parent element, but the translation is wrt the element itself 
+  top: 40%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  text-align: center;
+}
+
+*/

@@ -1,0 +1,45 @@
+/*we put heading into typography as the most intuitive way to think about heading would be typography*/
+
+.heading-primary {
+  color: $color-white;
+  text-transform: uppercase;
+
+  /* the animations we're using below are jittery sometimes, no one knows why this happens, but there is a fix for it, and that is by using the following command. It is however, used to hide the back part of the elements and is not meant for this purpose, but it works and stops the jitters so we use it */
+  backface-visibility: hidden;
+  margin-bottom: 6rem;
+
+  /* doing the same as above by using & to nest the BEM code and make it shorter*/
+  &--main {
+    /* we set display as block to get have this element have the whole line for itlself, as span is inline by default */
+    display: block;
+    font-size: 6rem;
+    font-weight: 700;
+    letter-spacing: 3.5rem;
+
+    /* for the animation to work (the one shown in moveInLeft), we need to specify only two properties in the element's css specifically, and they are animation name and duration as shown below */
+    animation-name: moveInLeft;
+    animation-duration: 0.85s;
+
+    /* after the basic animation related properties, we can add some more, like animation delay, which does what the name suggests */
+    /* animation-delay: 3s; */
+
+    /* to repeat an animation several times, we can use animation count and give the number */
+    /* animation-iteration-count: 3; */
+
+    /* there is another important property called animation-timing-function, which tells us how the animation will play out during its lifetime. There are many interesting options at mozilla website, check it out  */
+    animation-timing-function: ease-out;
+
+    /* Also, instead of typing so much by typing animation-name, animation-duration and animation-timing-function, we can just write animation and pass these values the way we would normally do in order, and the browser will figure out itself what is what. Example below - 
+    animation: moveInLeft 0.85s ease-out; */
+  }
+
+  &--sub {
+    display: block;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 1.74rem;
+    animation: moveInRight 0.85s ease-out;
+  }
+
+  /* there are 2 types of animations in css. The first one is easier, and it uses the transition property, and then change the properties whenever we want to animate the element, for eg while hovering. The second method uses keyframes and is shown below. */
+}

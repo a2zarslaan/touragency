@@ -1,0 +1,49 @@
+/*placing the animations in the animations file*/
+
+@keyframes moveInLeft {
+  /* these percentages are there to instruct the browser to act in a certain way when the animation is 0, 80 and 100% done. For the best performance it is best to animate only two properties. We will be using opacity and transform properties. That's what the borwsers are optimised for. However, you can go really crazy with animations, can add rotations to transforms  and stuff. Look it up */
+  0% {
+    opacity: 0;
+    transform: translate(-10rem);
+  }
+
+  80% {
+    /* we are adding slight positive x translation to the element at 80% value so that it creates a slight bouncy effect */
+    transform: translate(1rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInRight {
+  /* another function for the .heading-primary-sub */
+  0% {
+    opacity: 0;
+    transform: translate(10rem);
+  }
+
+  80% {
+    transform: translate(-1rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInButton {
+  /* another function for the .heading-primary-sub */
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
