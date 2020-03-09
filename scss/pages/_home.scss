@@ -6,3 +6,30 @@
   padding: 25rem 0;
   margin-top: -20vh;
 }
+
+.section-features {
+  //adding padding to give a modern and spaced out look
+  padding: 20rem 0;
+
+  //adding gradient background image like the home page cover
+  background-image: linear-gradient(
+      to right bottom,
+      rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(../img/nat-4.jpg);
+
+  //nicely covers the section
+  background-size: cover;
+
+  //now, to create a parallelogram in the background we can use clip path life we did for the home page, but there's another nice trick we can use to achieve this. We can just skew the entire section by a small amount. What will happen is, that we will get our parallelogram but all the feature boxes will also get skewed. To counter that, we will just skew the feature boxes by the same amount in opposite direction, that is, by +7 degrees! Brilliant! Further, we won't do that in feature-box's CSS, we'll do it here, by using a new type of selector called direct child selector. It selects the direct children of the given element. Here we'll select all the direct children of the element with sections-features class
+  transform: skewY(-7deg);
+
+  //to cover the white space caused bin the background because of the skewing, we'll just move our section up a bit using newgative top margin
+  margin-top: -10rem;
+
+  //the > symbol enables us to select only the direct childs of the element. If we had just used the * without >, we'd have selected all the children, not just direct children.
+  & > * {
+    transform: skewY(7deg);
+  }
+}

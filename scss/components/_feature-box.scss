@@ -1,0 +1,36 @@
+.feature-box {
+  background-color: rgba($color-white, $alpha: 0.7);
+  font-size: 1.5rem;
+  padding: 2.5rem;
+  text-align: center;
+  border-radius: 3px;
+
+  box-shadow: 0 1.5rem 4rem rgba($color-black, $alpha: 0.15);
+
+  //to have a smooth transition for all effects in feature-box
+  transition: all 0.2s;
+
+  &__icon {
+    //we're using font-size because the icon is basically a font
+    font-size: 6rem;
+
+    margin-bottom: 0.5rem;
+
+    //to make a separate gradient appear on top of the icons as well, we'll use the same technique we used for styling heading-secondary in the typography partial. We'll use -webkit-background-clip: text; and then make the tezt transparent
+    display: inline-block;
+    background-image: linear-gradient(
+      to right,
+      $color-primary-light,
+      $color-primary-dark
+    );
+
+    //to make the background gradient appear only inside the text, we'll use a new CSS property, called webkit background clip
+    -webkit-background-clip: text;
+    //now the clipped text would be visible only behind the text, so we'd have to make the text transparent to be able to see the gradient. Here the icons are basically a font, so they will be treated like text everywhere
+    color: transparent;
+  }
+
+  &:hover {
+    transform: translateY(-1.5rem) scale(1.03);
+  }
+}
