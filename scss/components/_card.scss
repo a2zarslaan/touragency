@@ -1,0 +1,66 @@
+.card {
+  //the effect of the card flipping and coming out of the screen is done because of the property called perspective. Whenever we add perspective we do it to the parent element. The lower the value, the more dramatic the perspective effect
+  perspective: 150rem;
+  //the following line enables this effect in mozilla firefox
+  -moz-perspective: 150rem;
+
+  //giving relative positioning to the parent to enable absolute positioning below
+  position: relative;
+
+  //the way the parent element collapses everytime all the children are floats, the same thing happends when all the children are in absolute position. But there is no fix for this the way it is for floats using clearfix. So we will just assign the card the same height as the __side elements below so that it doesn't collapse
+  height: 50rem;
+
+  &__side {
+    //text properties
+    color: #fff;
+    font-size: 2rem;
+
+    height: 50rem;
+    transition: all 0.8s ease; //ease property just changes the flow of animation, to be discussed later in detail
+
+    //by defult the card will be one below the other, but if we want to show different sides to the card, we will use absolute positioning and overlap them
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    //by taking the steps above the cards will overlap each other but will have different widths according to the width of the text. to overcome this, we'll use width property
+    width: 100%;
+
+    //also, using the properties above the cards overlap but their backs are visible even after rotation. This is the first time we're actually using this property th eway it is meant to be used, this time it is not fixing an animaton, it will hide the back part of the card
+    backface-visibility: hidden;
+
+    //giving round edges and shadows
+    border-radius: 3px;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
+
+    &--front {
+      background-color: $color-white;
+    }
+
+    //backside in the beginning is already rotated, that means it is already 180 degrees on the back, and as soon as we hover on the card, it moves to zero.
+    &--back {
+      //before we hover the card, this backside is already flipped
+      transform: rotateY(180deg);
+
+      &-1 {
+        //adding linear gradient for the back of the card
+        background-image: linear-gradient(
+          to right bottom,
+          $color-secondary-light,
+          $color-secondary-dark
+        );
+      }
+    }
+  }
+
+  //when we hover the card, the card__side will be transformed. We're not putting the hover here directly, on card__side (like this - &__side:hover) because later we will have more sides and we want this effect to take place when we're hovering on the card
+  &:hover &__side--front {
+    //only the front side will rotate 180 degrees as the backside is already rotated 180 degrees
+    transform: rotateY(180deg);
+  }
+
+  &:hover &__side--back {
+    //backside was already at 180 degrees and now needs to be rotated back to 0
+    transform: rotateY(0);
+  }
+}

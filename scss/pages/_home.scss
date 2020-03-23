@@ -33,3 +33,12 @@
     transform: skewY(7deg);
   }
 }
+
+.section-tours {
+  //copying some properties from section-features
+  background-color: $color-grey-light-1;
+  padding: 25rem 0 50rem 0;
+
+  //adding negative margin to shift the section back upwards, to match the background color
+  margin-top: -10rem;
+}
