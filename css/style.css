@@ -216,11 +216,10 @@ body {
   perspective: 150rem;
   -moz-perspective: 150rem;
   position: relative;
-  height: 50rem; }
+  height: 52rem; }
   .card__side {
-    color: #fff;
     font-size: 2rem;
-    height: 50rem;
+    height: 52rem;
     transition: all 0.8s ease;
     position: absolute;
     top: 0;
@@ -228,6 +227,7 @@ body {
     width: 100%;
     backface-visibility: hidden;
     border-radius: 3px;
+    overflow: hidden;
     box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.15); }
     .card__side--front {
       background-color: #fff; }
@@ -236,9 +236,50 @@ body {
       .card__side--back-1 {
         background-image: linear-gradient(to right bottom, #ffb900, #ff7730); }
   .card:hover .card__side--front {
-    transform: rotateY(180deg); }
+    transform: rotateY(-180deg); }
   .card:hover .card__side--back {
     transform: rotateY(0); }
+  .card__picture {
+    background-size: cover;
+    height: 23rem;
+    background-blend-mode: screen;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
+    .card__picture--1 {
+      background-image: linear-gradient(to right bottom, #ffb900, #ff7730), url(../img/nat-5.jpg); }
+    .card__picture--2 {
+      background-image: url(../img/nat-5.jpg); }
+    .card__picture--3 {
+      background-image: url(../img/nat-5.jpg); }
+  .card__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: right;
+    color: #fff;
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+    width: 75%; }
+  .card__heading-span {
+    padding: 1rem 1.5rem;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone; }
+    .card__heading-span--1 {
+      background-image: linear-gradient(to right bottom, rgba(255, 185, 0, 0.85), rgba(255, 119, 48, 0.85)); }
+  .card__details {
+    padding: 3rem;
+    width: 80%;
+    margin: 0 auto; }
+    .card__details ul {
+      list-style: none;
+      width: 80%; }
+      .card__details ul li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem; }
+        .card__details ul li:not(:last-child) {
+          border-bottom: 1px solid #eee; }
 
 .composition {
   position: relative; }
@@ -323,6 +364,7 @@ body {
   background-position: top;
   /* the slanted triangle at the bottom right of the header can be achieved by using clip-path, which is a new and advanced feature of css. We'll spacify the 4 corners as parameters of the points in the window that we want to keep visible. In the case below we will use vh(viewport height) instead of percentage, so that the height will be adjusted based on the height of the viewport. There is an online solution to create complicated clip paths, check out https://bennettfeely.com/clippy, and just copy paste the parameters of the clip-path property*/
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   position: relative;
   /* Now since we are following BEM model to structure our code as visible below, we can leverage the '&' sign feature of SCSS to replace the class names which originally used to be written separately. We can now write them together. inside the header class. Check the major chunk of commented out code below to understand */ }
   .header__logo-box {

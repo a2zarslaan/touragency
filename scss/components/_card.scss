@@ -8,14 +8,13 @@
   position: relative;
 
   //the way the parent element collapses everytime all the children are floats, the same thing happends when all the children are in absolute position. But there is no fix for this the way it is for floats using clearfix. So we will just assign the card the same height as the __side elements below so that it doesn't collapse
-  height: 50rem;
+  height: 52rem;
 
   &__side {
     //text properties
-    color: #fff;
     font-size: 2rem;
 
-    height: 50rem;
+    height: 52rem;
     transition: all 0.8s ease; //ease property just changes the flow of animation, to be discussed later in detail
 
     //by defult the card will be one below the other, but if we want to show different sides to the card, we will use absolute positioning and overlap them
@@ -31,6 +30,10 @@
 
     //giving round edges and shadows
     border-radius: 3px;
+
+    //because of the background image overflowing, these corners will not be rounded anymore once the background image is added. To prevent that from happening, we'll use the overflow property
+    overflow: hidden;
+
     box-shadow: 0 1.5rem 4rem rgba($color-black, 0.15);
 
     &--front {
@@ -56,11 +59,105 @@
   //when we hover the card, the card__side will be transformed. We're not putting the hover here directly, on card__side (like this - &__side:hover) because later we will have more sides and we want this effect to take place when we're hovering on the card
   &:hover &__side--front {
     //only the front side will rotate 180 degrees as the backside is already rotated 180 degrees
-    transform: rotateY(180deg);
+    transform: rotateY(-180deg);
   }
 
   &:hover &__side--back {
     //backside was already at 180 degrees and now needs to be rotated back to 0
     transform: rotateY(0);
+  }
+
+  //adding picture below, front side styling
+  &__picture {
+    background-size: cover;
+
+    //by default the image section will be very small as the blank space doesn't take more space than a line. Hence we'll have to define the height manually
+    height: 23rem;
+
+    //using background-blend-mode property to blend the two background images
+    background-blend-mode: screen;
+
+    //using clip path to create a small negative space triangle
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+    //adding webkit property so that clip path can work with most browsers, still won't work with internet explorer and microsoft edge
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+
+    //card 1
+    &--1 {
+      background-image: linear-gradient(
+          to right bottom,
+          $color-secondary-light,
+          $color-secondary-dark
+        ),
+        url(../img/nat-5.jpg);
+    }
+
+    //card 2
+    &--2 {
+      background-image: url(../img/nat-5.jpg);
+    }
+
+    //card 3
+    &--3 {
+      background-image: url(../img/nat-5.jpg);
+    }
+  }
+
+  //heading
+  &__heading {
+    font-size: 2.8rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    text-align: right;
+    color: $color-white;
+    position: absolute;
+    top: 12rem;
+    right: 2rem;
+    width: 75%;
+  }
+
+  //according to BEM system, heading-span is a new element so we will not nest it inside the __heading above
+  &__heading-span {
+    padding: 1rem 1.5rem;
+
+    //currently the element is treated as one line of text so the padding is applied on the left of "the" and the right of "explorer" in "the sky explorer" heading. When it is broken into 2 lines using a smaller width percentage (75%) as done above, the padding makes the design look odd and unevenly spaced. To prevent that, we are using box-decoration-break property. box-decoration-break treats the two line in the heading as two separate elements, and thus the left and right paddings are applied to both "the sky" and "explorer' to create a more uniform design
+    box-decoration-break: clone;
+
+    //the property above doesn't work with google chrome without -webkit
+    -webkit-box-decoration-break: clone;
+    &--1 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-secondary-light, 0.85),
+        rgba($color-secondary-dark, 0.85)
+      );
+    }
+  }
+
+  &__details {
+    padding: 3rem;
+    width: 80%;
+
+    //we can use absolute positioning to center the list elements, but since it is a block element inside a block element, we can just use margin to center it.
+    margin: 0 auto;
+
+    ul {
+      list-style: none;
+
+      //width is 80% because we do not want the lines to go from left to right completely
+      width: 80%;
+
+      li {
+        text-align: center;
+        font-size: 1.5rem;
+        padding: 1rem;
+
+        //all elements except the last one will have a border below
+        &:not(:last-child) {
+          border-bottom: 1px solid $color-grey-light-2;
+        }
+      }
+    }
   }
 }

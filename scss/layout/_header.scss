@@ -17,6 +17,10 @@
 
   /* the slanted triangle at the bottom right of the header can be achieved by using clip-path, which is a new and advanced feature of css. We'll spacify the 4 corners as parameters of the points in the window that we want to keep visible. In the case below we will use vh(viewport height) instead of percentage, so that the height will be adjusted based on the height of the viewport. There is an online solution to create complicated clip paths, check out https://bennettfeely.com/clippy, and just copy paste the parameters of the clip-path property*/
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+  //adding webkit property so that clip path can work with most browsers, still won't work with internet explorer and microsoft edge
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
   position: relative;
 
   /* Now since we are following BEM model to structure our code as visible below, we can leverage the '&' sign feature of SCSS to replace the class names which originally used to be written separately. We can now write them together. inside the header class. Check the major chunk of commented out code below to understand */
