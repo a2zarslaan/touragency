@@ -51,6 +51,16 @@
     }
   }
 
+  //green button for use in __card partial
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &::after {
+      background-color: $color-primary;
+    }
+  }
+
   /* to create the button zoom in effect, we'll use the ::after pseudo element, that we'll use to create a virtual button after the real button to show that effect */
 
   &::after {

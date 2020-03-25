@@ -53,6 +53,24 @@
           $color-secondary-dark
         );
       }
+
+      &-2 {
+        //adding linear gradient for the back of the card
+        background-image: linear-gradient(
+          to right bottom,
+          $color-primary-light,
+          $color-primary-dark
+        );
+      }
+
+      &-3 {
+        //adding linear gradient for the back of the card
+        background-image: linear-gradient(
+          to right bottom,
+          $color-tertiary-light,
+          $color-tertiary-dark
+        );
+      }
     }
   }
 
@@ -95,12 +113,22 @@
 
     //card 2
     &--2 {
-      background-image: url(../img/nat-5.jpg);
+      background-image: linear-gradient(
+          to right bottom,
+          $color-primary-light,
+          $color-primary-dark
+        ),
+        url(../img/nat-6.jpg);
     }
 
     //card 3
     &--3 {
-      background-image: url(../img/nat-5.jpg);
+      background-image: linear-gradient(
+          to right bottom,
+          $color-tertiary-light,
+          $color-tertiary-dark
+        ),
+        url(../img/nat-7.jpg);
     }
   }
 
@@ -133,20 +161,35 @@
         rgba($color-secondary-dark, 0.85)
       );
     }
+
+    //card 2
+    &--2 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.85),
+        rgba($color-primary-dark, 0.85)
+      );
+    }
+
+    //card 3
+    &--3 {
+      background-image: linear-gradient(
+        to right bottom,
+        rgba($color-tertiary-light, 0.85),
+        rgba($color-tertiary-dark, 0.85)
+      );
+    }
   }
 
   &__details {
     padding: 3rem;
-    width: 80%;
-
-    //we can use absolute positioning to center the list elements, but since it is a block element inside a block element, we can just use margin to center it.
-    margin: 0 auto;
-
     ul {
       list-style: none;
 
       //width is 80% because we do not want the lines to go from left to right completely
       width: 80%;
+      //we can use absolute positioning to center the list elements, but since it is a block element inside a block element, we can just use margin to center it.
+      margin: 0 auto;
 
       li {
         text-align: center;
@@ -159,5 +202,36 @@
         }
       }
     }
+  }
+
+  //backside styling
+  &__cta {
+    //centering  the button using the previous trick we used for header. It is very common
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    //without defining a width it would the button was taking the default width of the container and thus resulting in 2 lines in the button
+    width: 90%;
+
+    //but now after we fix the width, the button is not in the center anymore, so we can use text-align on button to center it
+    text-align: center;
+  }
+
+  &__price-box {
+    text-align: center;
+    color: $color-white;
+    margin-bottom: 8rem;
+  }
+
+  &__price-only {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+  }
+
+  &__price-value {
+    font-size: 6rem;
+    font-weight: 100;
   }
 }
