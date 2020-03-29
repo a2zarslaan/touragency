@@ -98,6 +98,10 @@
     //using clip path to create a small negative space triangle
     clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
 
+    //because of the clip path property we use, for some reason the overflow: hidden properrty stops working and thus the corners are not rounded anymore again, and to deal with that we need to manually define the rounded corners again.
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+
     //adding webkit property so that clip path can work with most browsers, still won't work with internet explorer and microsoft edge
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
 

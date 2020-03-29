@@ -1,0 +1,103 @@
+.story {
+  width: 75%;
+
+  //since it's a block element inside block element, we can just use the margin as below to center it
+  margin: 0 auto;
+
+  box-shadow: 0 3rem 6rem rgba($color-black, 0.1);
+
+  background-color: rgba($color-white, 0.6);
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem;
+  font-size: $default-font-size;
+  transform: skewX(-12deg);
+
+  //we can use the direct child selector like before to straighten all other elements other than the square (turned into parallelogram).
+  //& > * {
+  // transform: skewX(12deg);
+  //}
+  //But that method won't work here because in CSS we cannot apply more than one transform at the same element in 2 different places at the same time. But they are working towards improving it. For now, we'll simply add the trnasform skew to the story__text class and just the skew part to the transform
+
+  &__shape {
+    width: 15rem;
+    height: 15rem;
+
+    //we'll set float to let in order the make everything float to the right of the image, text here specifically
+    float: left;
+
+    //to make the text to the right of the circle to wrap around the circle, we'll use the shape outside property. When using this property, we don't even have to have the shape as circle, but the text will still wrap around a circular shape if we use this property
+    //here we can define the size and center of the shape, first parameter is the radius with regard to the element, second and third parameters are the center coordinates in X and Y axis, which in the following case are equal. Also, it is a pretty demanding property. It only works if the element has a defined width, height, and is a floating element.
+    shape-outside: circle(50% at 50% 50%);
+    //for the above effect to work in safari, we'll need to use webkit. Also, it doesn't work in firefox, internet explorer and microsoft edge.
+    -webkit-shape-outside: circle(50% at 50% 50%);
+
+    //to put a circle shape there, we'll use clip path. The definition of the shape will be exactly as the shape outside proeprty
+    clip-path: circle(50% at 50% 50%);
+    -webkit-clip-path: circle(50% at 50% 50%);
+
+    //moving the text a bit to the right, to create some space between text and circle. This will cause the padding on the left to get decreased by 3rem, so we'll add it back up in the code above where left padding is defined
+    transform: translateX(-3rem) skewX(12deg);
+
+    //for absolute positioning of the figcaption
+    position: relative;
+  }
+
+  &__img {
+    //in responsive design, the image needs to be assigned a width separately, as the default image resolution generally doesn't fit our requirement. But here, if we assign 100% width, the image will fill half the circle due to the landscape orientation, so in this case it will be better to assign the height as 100%
+    height: 100%;
+
+    //to centerize the girl in the background, we translate it. Also, scale adds the zoom effect on hover
+    transform: translateX(-4rem) scale(1.4rem);
+
+    //in animation and translation whenever something weird and unexpected happens, generally it is because of backface visibility. So we should try to use it to fix random glitches
+    backface-visibility: hidden;
+
+    //to make the transition smoother
+    transition: all 0.5s;
+  }
+
+  &__text {
+    transform: skewX(12deg);
+  }
+
+  &__caption {
+    //to add caption right on top of the image
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    //generally the translate would be -50%, -50% to center the element again but here we want to create a transition where the element comes up from the bottom, and for that we need to translate the figcaption to the bottom first. hence we'll give it a +20% Y-translation
+    transform: translate(-50%, 20%);
+
+    color: $color-white;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    text-align: center;
+
+    //to keep the figcaption invisible until someone hovers on top of it
+    opacity: 0;
+
+    //to make the transition smoother
+    transition: all 0.5s;
+
+    //to fix the animation glitch as done before. This property is not required here but it just smoothens the jittery transition out for some reason. Hence using it here
+    backface-visibility: hidden;
+  }
+
+  &:hover &__caption {
+    //to make it visible on hover
+    opacity: 1;
+
+    //to translate it back up to the center of the image
+    transform: translate(-50%, -50%);
+  }
+
+  //to create the blur and zoom effect on image hover
+  &:hover &__img {
+    transform: translateX(-4rem) scale(1rem);
+
+    //using the filter property in CSS here. We can add multiple different kind of filters together in CSS. Look it up. Also, brightness less than 100% means the image will get darker and vice versa
+    filter: blur(3px) brightness(80%);
+  }
+}
