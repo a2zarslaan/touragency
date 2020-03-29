@@ -9,10 +9,13 @@
 
   opacity: 0.15;
 
+  //if video exceeds the container boundary, we will hide it using the following property
+  overflow: hidden;
+
   &__content {
     height: 100%;
     width: 100%;
-    //the above properties will fuck up the aspect ration of the video and the fit won't be perfect to the screen. To counter this we will use the newer CSS property called object-fit. Wehn we use this property, the video will still fill its entire parent while still maintaining the aspect ratio
+    //the above properties will fuck up the aspect ration of the video and the fit won't be perfect to the screen. To counter this we will use the newer CSS property called object-fit. Wehn we use this property, the video will still fill its entire parent while still maintaining the aspect ratio. Object-fit: cover is like background cover but we're using video here instead of an image. We can use this porperty with images too
     object-fit: cover;
   }
 }
