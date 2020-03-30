@@ -45,15 +45,74 @@
     margin-left: 2rem;
     margin-top: 0.7rem;
     display: block;
-
     transition: all 0.3s;
   }
 
   //here we are using the adjacent sibling selector(+), just because the label is right after the input class. If it was not exactly after, we'd have used (~), which is the general sibling selector. Also, in order for these to work, the first element always has to come before the sibling in the HTML. Order is very important in sibling selector
   &__input:placeholder-shown + &__label {
-    //we set opacity 0 and then visibility hidden because if we had set only the opacity to 0 the element would not be visible but would still stay at the same spot. On the other hand, if we just set the visibility to hidden, then the element is just gone
+    //we set opacity 0 and then visibility hidden because if we had set only the opacity to 0 the element would not be visible but would still stay at the same spot. On the other hand, if we just set the visibility to hidden, we won't be able to animate the visibility
     opacity: 0;
     visibility: hidden;
     transform: translateY(-4rem);
+  }
+
+  //for styling the radio buttons
+  &__radio-group {
+    //width is 49% because the buttons were not showing side by side probably due to padding when it was 50%
+    width: 49%;
+    display: inline-block;
+  }
+
+  //to hide the default radio button
+  &__radio-input {
+    display: none;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+
+    //to show a hand when the cursor is in the radio buttons
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  //custom radio button
+  &__radio-button {
+    //same height and width for a circle
+    height: 3rem;
+    width: 3rem;
+
+    border: 5px solid $color-primary;
+    border-radius: 50%;
+
+    //this will owrk only for block or inline block elements
+    display: inline-block;
+
+    //to position precisely
+    position: absolute;
+    left: 0;
+    top: -0.4rem;
+
+    &::after {
+      //content property is compulsory whenever a pseudo element is used
+      content: "";
+      display: block;
+      height: 1.3rem;
+      width: 1.3rem;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-primary;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  }
+
+  //using the sibling selector
+  &__radio-input:checked ~ &__radio-label &__radio-button::after {
+    opacity: 1;
   }
 }

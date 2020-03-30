@@ -1,25 +1,27 @@
+//even if this is not a good practice, but we'll be adding important after all these margins, because we want them to take precedence over every other margin property. It is okay to do this in utility classes
+
 .u-center-text {
-  text-align: center;
+  text-align: center !important;
 }
 
 //having hardcoded utility classes for margin didn't make sense, like u-margin-bottom-8 and u-margin-bottom-2, because it was equivalent to having inline styles in the tags. So we are using more intuitive names and renaming our utility classes for margin. It was hardcoded in a sense as if we wanted to change it to some other number in the future, we'd also have to change the classnames everywhere
 .u-margin-bottom-big {
-  margin-bottom: 8rem;
+  margin-bottom: 8rem !important;
 }
 
 .u-margin-bottom-medium {
-  margin-bottom: 4rem;
+  margin-bottom: 4rem !important;
 }
 
 .u-margin-bottom-small {
-  margin-bottom: 2rem;
+  margin-bottom: 2rem !important;
 }
 
 //margin top for use in __card partial
 .u-margin-top-big {
-  margin-top: 8rem;
+  margin-top: 8rem !important;
 }
 
 .u-margin-top-huge {
-  margin-top: 10rem;
+  margin-top: 10rem !important;
 }

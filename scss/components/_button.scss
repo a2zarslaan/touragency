@@ -1,6 +1,8 @@
 /*button is an independent component and can be reused anywhere in the project, hence placing it here*/
 
 .btn {
+  //the difference between the button and the anchor trag is, that the button doesn't have the link and visited, we want all these properties to get applied to the btn element in all states, that's why we're adding an & so that btn
+  &,
   &:link,
   &:visited {
     text-transform: uppercase;
@@ -18,6 +20,10 @@
     /* for the pseudo element virtual buton, we'll have to set the positioning of this element */
     position: relative;
     font-size: 1.2rem;
+
+    //change for the <button> element
+    border: none;
+    cursor: pointer;
   }
 
   &:hover {
@@ -34,7 +40,10 @@
     }
   }
 
+  &:focus,
   &:active {
+    //to prevent blue border when the element is in focus
+    outline: none;
     /* this pseudo class gets activated when we click on the element, this is generally used to create the push back effect when a button is pressed */
     transform: translate(-0.1rem);
 
