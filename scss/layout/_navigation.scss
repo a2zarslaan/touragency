@@ -1,0 +1,202 @@
+.navigation {
+  &__checkbox {
+    //we don't want the checkbox to be visible, we only want to use it to trigger the nav bar opening animation
+    display: none;
+  }
+
+  //this will cover the radial gradient of the &__background till it is exposed
+  &__button {
+    background-color: $color-white;
+    height: 7rem;
+    width: 7rem;
+    position: fixed;
+    top: 6rem;
+    right: 6rem;
+
+    border-radius: 50%;
+
+    //will be higher than z index of &__background because it needs to cover the background gradient till it expands
+    z-index: 2000;
+
+    box-shadow: 0 1rem 3rem rgba($color-black, 0.1);
+
+    text-align: center;
+
+    cursor: pointer;
+  }
+
+  //this will expand to becoem the background of the nav
+  &__background {
+    //circular white button to show navigation
+    height: 6rem;
+    width: 6rem;
+    border-radius: 50%;
+    position: fixed;
+
+    top: 6.5rem;
+    right: 6.5rem;
+
+    //using radial gradient here for a change. Linear gradient goes from one side to the other while the radial gradient starts from the middle of the element and goes to all the sides.
+    background-image: radial-gradient(
+      $color-primary-light,
+      $color-primary-dark
+    );
+
+    z-index: 1000;
+
+    //scaling it much bigger to cover even the bigger screens
+    //transform: scale(100); //hiding the background in initial state
+
+    //for the transition of the nav popping out. Cubic bezier takes 4 parameters, we can use a site like easings.net to find out the exact values we'd like. We copy the values inside the transition section of our desired effect and paste them here. Can also define custom values on cubic-bezier.com
+    transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  //this is the actual navigation element
+  &__nav {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    //this element needs to be in the middle
+    z-index: 1500;
+
+    //hiding the nav in initial state. If we set only opacity to zero the links would still be detectable by the cursor, so we changed to width to zero too
+    width: 0;
+    opacity: 0;
+
+    //for the transition of the nav popping out. We need to specify it for both the places, here and for background
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  //this is the nav bar inside the navigation element
+  &__list {
+    //this whole code snippet for centering the element can be a good candidate for a mixin. We can make it if we want
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    list-style: none;
+    text-align: center;
+  }
+
+  &__item {
+  }
+
+  &__link {
+    &:link,
+    &:visited {
+      //padding would misbehave if this is not present
+      display: inline-block;
+      font-size: 3rem;
+      font-weight: 300;
+      padding: 1rem 2rem;
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+
+      //to create the triangle split effect on hover to the navbar links
+      background-image: linear-gradient(
+        120deg,
+        transparent 0%,
+        transparent 50%,
+        $color-white 50%
+      );
+
+      //increasing the background size so that only the left side of the background gradient(transparent) is visible and the right side (white) is out of the view of the nav link background
+      background-size: 225%;
+      //animating the background gradient's white part back into nav link background
+      transition: all 0.4s;
+
+      span {
+        margin-right: 1.5rem;
+        display: inline-block;
+      }
+    }
+
+    &:hover,
+    &:active {
+      //shifting the background all the way to the left so that we can see animate the white part of the gradient come back in the view as the background of the nav link elements
+      background-position: 100%;
+      color: $color-primary;
+      transform: translateX(1rem);
+    }
+  }
+
+  //using the same trick we used to style the radio buttons
+  &__checkbox:checked ~ &__background {
+    //scaling the background back here
+    transform: scale(100);
+  }
+
+  &__checkbox:checked ~ &__nav {
+    //setting opacity and width back to normal for final state
+    opacity: 1;
+    width: 100%;
+  }
+
+  //navbar icon
+  &__icon {
+    //for absolute positioning of pseudo elements
+    position: relative;
+
+    //to set the hamburger in the center of the white circle
+    margin-top: 3.5rem;
+
+    &,
+    &::before,
+    &::after {
+      width: 3rem;
+      height: 2px;
+      background-color: $color-grey-dark-3;
+      display: inline-block;
+    }
+
+    &::before,
+    &::after {
+      //it's compulsory to fill up the content property for before and after pseudo elements
+      content: "";
+      position: absolute;
+      left: 0;
+      transition: all 0.2s;
+    }
+
+    &::before {
+      //positioning the line as hamburger
+      top: -0.8rem;
+    }
+
+    &::after {
+      //positioning the line as hamburger
+      top: 0.8rem;
+    }
+  }
+
+  //because icon is the child element of the button. The following lines of code create an animation of the hamburger on hover
+  &__button:hover &__icon::before {
+    top: -1rem;
+  }
+
+  &__button:hover &__icon::after {
+    top: 1rem;
+  }
+
+  //the following 3 blocks of code are used to turn the hamburger to cross whenever the navigation menu is opened. Using adjacent sibling here. The code block directly below will make the middle line disappear
+  &__checkbox:checked + &__button &__icon {
+    background-color: transparent;
+  }
+
+  //rotate the top line to form a cross
+  &__checkbox:checked + &__button &__icon::before {
+    //we need to rotate the line just 45 degrees to form a cross, but to produce a full rotation before the cross is formed, we're using an angle of 180-45 = 135, which will make the line rotate once before getting into cross formation. Same things will happen for the other line, but in opposite direction
+    transform: rotate(135deg);
+    top: 0;
+  }
+
+  //rotate the bottom line to form a cross
+  &__checkbox:checked + &__button &__icon::after {
+    top: 0;
+    transform: rotate(-135deg);
+  }
+}
