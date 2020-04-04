@@ -7,6 +7,13 @@
   left: 0;
   z-index: 9999;
 
+  //for hiding the popup initially -
+  //we cannot add animations if the popup is hidden, so we'll turn opacity down and turn visibility to hidden
+  //display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s;
+
   &__content {
     // using mixin for absolute positioning
     @include absCenter;
@@ -16,6 +23,14 @@
     border-radius: 3px;
     display: table;
     overflow: hidden;
+
+    //for the zoom in effect, the initial state is written below with opacity and transform properties
+    opacity: 0;
+    //we can have only one transform property per element, and there was one transform inside the mixin included above. So to overcome this, we'll have to re-add the translate here so that the mixin one doesn't overwrite the whole transform property as opposed to what we are trying to do
+    transform: translate(-50%, -50%) scale(0.25);
+
+    //the zoom in effect won't work without transition. We're delaying the transition by 0.2s too here
+    transition: all 0.4s 0.2s;
   }
 
   &__left {
@@ -65,5 +80,41 @@
     -moz-hyphens: auto; //for mozilla
     -ms-hyphens: auto; //for microsoft/edge
     -webkit-hyphens: auto; //for chrome and safari
+  }
+
+  //when the button is clicked, this section becomes a target, so we'll use target pseudo-class to deal with it
+  &:target {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  //to create a zoom in effect whenever the popup opens
+  &:target &__content {
+    //final state for the popup is defined below with new opacity and transform
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  &__close {
+    &:link,
+    &:visited {
+      color: $color-grey-dark;
+      //we don't need to specify a position proerty for its parent separately because this absolute position would be wrt its first positioned parent, that is the popup__content, according to the HTMl structure. So this element will be positioned relative  to the popup__content position
+      position: absolute;
+      top: 2.5rem;
+      right: 2.5rem;
+      font-size: 3rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s;
+
+      //the X symbol was taking more height then required so :hover was wor king even when the pointer is not directly on top of it, we fixed it by giving the element a lsmall ine height
+      line-height: 1;
+    }
+
+    //to turn the close button (X) green when the user hovers on it
+    &:hover {
+      color: $color-primary;
+    }
   }
 }
