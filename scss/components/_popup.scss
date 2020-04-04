@@ -1,0 +1,69 @@
+.popup {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba($color-black, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+
+  &__content {
+    // using mixin for absolute positioning
+    @include absCenter;
+    width: 75%;
+    background-color: $color-white;
+    box-shadow: 0 2rem 4rem rgba($color-black, 0.15);
+    border-radius: 3px;
+    display: table;
+    overflow: hidden;
+  }
+
+  &__left {
+    width: 33.3333%;
+
+    //we can use float:left to make the left and right section stay side by side of each other. But that will cause both sections to have height according to the amount of content they have instead of having equal height, which will make ogranising them visually, difficult. So we'll use a different technique here, using table cells to create the boxes of same height side by side. We'll have to give the parent a display property of table for this to work. Here content is the parent element according to the HTML structure
+    //float: left;
+    display: table-cell;
+  }
+
+  &__right {
+    width: 66.6667%;
+
+    //using table cells to create the boxes of same height side by side. We'll have to give the parent a display property of table for this to work. Here content is the parent element according to the HTML structure
+    display: table-cell;
+
+    // using a table property to align the contents
+    vertical-align: middle;
+    padding: 3rem 5rem;
+  }
+
+  &__img {
+    display: block;
+    width: 100%;
+  }
+
+  &__text {
+    font-size: 1.4rem;
+    margin-bottom: 4rem;
+
+    //using column layout to split text into 2 columns. It's  a relatively new CSS property
+    column-count: 2;
+
+    //default column gap is 1em, not rem. em means the font-size relative to the font-size of the element we are working on currently, that is 14 pix here. Rem would be the font-size wrt the font size for the body
+    column-gap: 4rem;
+
+    //used to separate the columns
+    column-rule: 1px solid $color-grey-light-2;
+
+    // -moz prefix version of the column properties above
+    -moz-column-count: 2;
+    -moz-column-gap: 4rem;
+    -moz-column-rule: 1px solid $color-grey-light-2;
+
+    //adds hyphens wherever there's a paragraph break and the word is incomplete, instead of writing the whole word in the next line. But this property needs a lot of prefixes to work in older browsers
+    hyphens: auto;
+    -moz-hyphens: auto; //for mozilla
+    -ms-hyphens: auto; //for microsoft/edge
+    -webkit-hyphens: auto; //for chrome and safari
+  }
+}

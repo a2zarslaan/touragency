@@ -6,3 +6,11 @@
     clear: both;
   }
 }
+
+// mixin for absolute positioning. It was introduced in the code much later so we can still find this code snippet in some places in the codebase. This one is used in _popup partial for the first time
+@mixin absCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
