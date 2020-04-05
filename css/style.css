@@ -1,4 +1,25 @@
 /*abstracts need to be written before the base folder contents*/
+/*
+  0-600px       Phone
+  600-900px     Tablet Portrait
+  900-1200px    Tablet Landscape
+  [1200-1800px] This is where our normal styles apply
+  1800px+       Big Desktop
+
+  We'll write max-width media queries for the ranges lower than our normal working range and min-width for ranges more than our normal working range 
+
+
+  $breakpoint argument choices
+  - phone
+  - tab-port
+  - tab-land
+  - big-desktop
+
+  ORDER: Base + Typography > General layout (eg header, footer, nav etc.) + Grid > Page layout > Components  
+
+  we'll be using ems for media queries because rems behave weirdly for media queries. 
+  1em = 16px
+*/
 /*placing the variables in the relevant file*/
 /*
 COLORS:
@@ -55,6 +76,24 @@ html {
   /* using % is a better practice than using hardcoded pixels, 62.5% because 10 is 62.5% of 16px, which was the default font-size in the browser. This property defines what 1 rem is inside the document */
   font-size: 62.5%;
   /* also, we'll use rem inside this stylesheet instead of px everywhere because rem is relative to the root font size defined above, so it is very easy to change the font size when we want to adjust it or for responsive beahvior and smaller font size there. Also, we could have used em instead of rem, but that also considers size of parent elements font in addition to the root element's font, and it would require much more copmplicated calculations. Rem is very much straightforward compared to that hence we'll be using it */ }
+  @media (max-width: 75em) {
+    html {
+      font-size: 56.25%; } }
+  @media (max-width: 56.25em) {
+    html {
+      font-size: 50%; } }
+  @media (min-width: 112.5em) {
+    html {
+      font-size: 75%; } }
+
+body {
+  /* this is to make a white border around the whole webpage */
+  padding: 3rem;
+  /* prevents padding and borders(not margin) to be added to the total height or width of the box. Thus the element doesn't appear any bigger than it should be */
+  box-sizing: border-box; }
+  @media (max-width: 56.25em) {
+    body {
+      padding: 0; } }
 
 body {
   /* font is best handled in the body tag, it is the best practice */
@@ -62,11 +101,7 @@ body {
   font-weight: 400;
   /* font-size: 16px; */
   line-height: 1.7;
-  color: #777;
-  /* this is to make a white border around the whole webpage */
-  padding: 3rem;
-  /* prevents padding and borders(not margin) to be added to the total height or width of the box. Thus the element doesn't appear any bigger than it should be */
-  box-sizing: border-box; }
+  color: #777; }
 
 /*we put heading into typography as the most intuitive way to think about heading would be typography*/
 .heading-primary {
@@ -94,12 +129,19 @@ body {
     animation-timing-function: ease-out;
     /* Also, instead of typing so much by typing animation-name, animation-duration and animation-timing-function, we can just write animation and pass these values the way we would normally do in order, and the browser will figure out itself what is what. Example below - 
     animation: moveInLeft 0.85s ease-out; */ }
+    @media (max-width: 37.5em) {
+      .heading-primary--main {
+        letter-spacing: 1rem;
+        font-size: 5rem; } }
   .heading-primary--sub {
     display: block;
     font-size: 2rem;
     font-weight: 400;
     letter-spacing: 1.74rem;
     animation: moveInRight 0.85s ease-out; }
+    @media (max-width: 37.5em) {
+      .heading-primary--sub {
+        letter-spacing: 0.5rem; } }
 
 .heading-secondary {
   font-size: 3.5rem;
@@ -111,6 +153,12 @@ body {
   color: transparent;
   letter-spacing: 0.2rem;
   transition: all 0.2s; }
+  @media (max-width: 56.25em) {
+    .heading-secondary {
+      font-size: 3rem; } }
+  @media (max-width: 37.5em) {
+    .heading-secondary {
+      font-size: 2.5rem; } }
   .heading-secondary:hover {
     transform: skewY(2deg) skewX(15deg) scale(1.1);
     text-shadow: 0.5rem 1rem 2rem rgba(0, 0, 0, 0.2); }
@@ -574,10 +622,24 @@ body {
   margin: 0 auto; }
   .row:not(:last-child) {
     margin-bottom: 8rem; }
+    @media (max-width: 56.25em) {
+      .row:not(:last-child) {
+        margin-bottom: 6rem; } }
+  @media (max-width: 56.25em) {
+    .row {
+      max-width: 50rem;
+      padding: 0 2rem; } }
   .row [class^="col-"] {
     float: left; }
     .row [class^="col-"]:not(:last-child) {
       margin-right: 6em; }
+      @media (max-width: 56.25em) {
+        .row [class^="col-"]:not(:last-child) {
+          margin-right: 0;
+          margin-bottom: 6rem; } }
+    @media (max-width: 56.25em) {
+      .row [class^="col-"] {
+        width: 100% !important; } }
   .row::after {
     content: "";
     display: table;
@@ -610,6 +672,14 @@ body {
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
   text-align: center;
   cursor: pointer; }
+  @media (max-width: 56.25em) {
+    .navigation__button {
+      top: 4rem;
+      right: 4rem; } }
+  @media (max-width: 37.5em) {
+    .navigation__button {
+      top: 3.5rem;
+      right: 3.5rem; } }
 
 .navigation__background {
   height: 6rem;
@@ -621,6 +691,14 @@ body {
   background-image: radial-gradient(#55c57a, #28b485);
   z-index: 1000;
   transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1); }
+  @media (max-width: 56.25em) {
+    .navigation__background {
+      top: 4.5rem;
+      right: 4.5rem; } }
+  @media (max-width: 37.5em) {
+    .navigation__background {
+      top: 3.5rem;
+      right: 3.5rem; } }
 
 .navigation__nav {
   height: 100vh;
@@ -717,6 +795,10 @@ body {
   -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   position: relative;
   /* Now since we are following BEM model to structure our code as visible below, we can leverage the '&' sign feature of SCSS to replace the class names which originally used to be written separately. We can now write them together. inside the header class. Check the major chunk of commented out code below to understand */ }
+  @media (max-width: 37.5em) {
+    .header {
+      clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%); } }
   .header__logo-box {
     position: absolute;
     top: 4rem;
@@ -772,6 +854,9 @@ body {
   color: #f7f7f7;
   padding: 10rem 0;
   font-size: 1.4rem; }
+  @media (max-width: 56.25em) {
+    .footer {
+      padding: 8rem 0; } }
   .footer__logo-box {
     text-align: center;
     margin-bottom: 8rem; }
@@ -782,6 +867,10 @@ body {
     border-top: 1px solid #777;
     padding-top: 2rem;
     display: inline-block; }
+    @media (max-width: 56.25em) {
+      .footer__navigation {
+        width: 100%;
+        text-align: center; } }
   .footer__list {
     list-style: none; }
   .footer__item {
@@ -804,6 +893,10 @@ body {
     padding-top: 2rem;
     width: 80%;
     float: right; }
+    @media (max-width: 56.25em) {
+      .footer__copyright {
+        width: 100%;
+        float: none; } }
 
 .section-about {
   background-color: #f7f7f7;

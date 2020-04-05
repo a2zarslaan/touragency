@@ -4,6 +4,11 @@
   //defining the color here so tha the copyright class will inherit it
   color: $color-grey-light-1;
 
+  //changing the footer layout for smaller screens
+  @include respond(tab-port) {
+    padding: 8rem 0;
+  }
+
   padding: 10rem 0;
   font-size: 1.4rem;
 
@@ -24,6 +29,12 @@
 
     //to make the line only cover the nav bar's width, we'll use inline block. It will take up 100% of the space that is available
     display: inline-block;
+
+    //taking whole screen width for smaller screens
+    @include respond(tab-port) {
+      width: 100%;
+      text-align: center;
+    }
   }
 
   &__list {
@@ -64,5 +75,11 @@
     padding-top: 2rem;
     width: 80%;
     float: right;
+
+    //taking whole screen width for smaller screens
+    @include respond(tab-port) {
+      width: 100%;
+      float: none;
+    }
   }
 }

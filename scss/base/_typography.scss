@@ -1,3 +1,12 @@
+body {
+  /* font is best handled in the body tag, it is the best practice */
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* font-size: 16px; */
+  line-height: 1.7;
+  color: $color-grey-dark;
+}
+
 /*we put heading into typography as the most intuitive way to think about heading would be typography*/
 
 .heading-primary {
@@ -31,6 +40,13 @@
 
     /* Also, instead of typing so much by typing animation-name, animation-duration and animation-timing-function, we can just write animation and pass these values the way we would normally do in order, and the browser will figure out itself what is what. Example below - 
     animation: moveInLeft 0.85s ease-out; */
+
+    //mq to handle the text size for smaller screens
+    @include respond(phone) {
+      //width <= 600?
+      letter-spacing: 1rem;
+      font-size: 5rem;
+    }
   }
 
   &--sub {
@@ -39,6 +55,12 @@
     font-weight: 400;
     letter-spacing: 1.74rem;
     animation: moveInRight 0.85s ease-out;
+
+    //mq to handle the text size for smaller screens
+    @include respond(phone) {
+      //width <= 600?
+      letter-spacing: 0.5rem;
+    }
   }
 
   /* there are 2 types of animations in css. The first one is easier, and it uses the transition property, and then change the properties whenever we want to animate the element, for eg while hovering. The second method uses keyframes and is shown below. */
@@ -65,6 +87,15 @@
   color: transparent;
   letter-spacing: 0.2rem;
   transition: all 0.2s;
+
+  //mq to handle the text size for smaller screens. Phone is smaller so it comes after the tablet
+  @include respond(tab-port) {
+    font-size: 3rem;
+  }
+
+  @include respond(phone) {
+    font-size: 2.5rem;
+  }
 
   //adding animation on hover
   &:hover {

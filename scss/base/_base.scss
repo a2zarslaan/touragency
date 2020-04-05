@@ -14,20 +14,47 @@
 
 html {
   /* using % is a better practice than using hardcoded pixels, 62.5% because 10 is 62.5% of 16px, which was the default font-size in the browser. This property defines what 1 rem is inside the document */
-  font-size: 62.5%;
+  font-size: 62.5%; //1rem = 10px; 10px/16px = 62.5%
   /* also, we'll use rem inside this stylesheet instead of px everywhere because rem is relative to the root font size defined above, so it is very easy to change the font size when we want to adjust it or for responsive beahvior and smaller font size there. Also, we could have used em instead of rem, but that also considers size of parent elements font in addition to the root element's font, and it would require much more copmplicated calculations. Rem is very much straightforward compared to that hence we'll be using it */
+
+  //media queries using mixins and @content directives
+  //here the browser checks whether the max-width is equal to or smaller than 600px. If true, it sets the font size to 50%, that is 8px. But, in the next query, we check for all screen sizes lower than 900px, which covers 600px too. So we can just remove the media query for phone as media query for tablet covers it and gives a same result.
+  //@include respond(phone) {
+  //  font-size: 50%;
+  //}
+
+  //ordering is very important, so in case of max-width we check the larger screen width first. So that the one at the end, if it is a smaller screen size, the media queries for that are applied and are not covered by the larger screen size. The same logic won't apply to big-desktop as we're checking for min-width there, and so in min-width we reverse the order. We put the largest screen size at the bottom and the smallest at the top
+  @include respond(tab-land) {
+    //width <= 1200?
+    font-size: 56.25%; //1rem = 9px, 9/16 = 56.25%
+  }
+
+  @include respond(tab-port) {
+    //width <= 900?
+    font-size: 50%; //1rem = 8px, 8/16 = 50%
+  }
+
+  //we can still include phone just to test our logic out. Here we've given the phone a smaller font size then before so it's okay to use it now.
+  // @include respond(phone) {
+  //   //width <= 600?
+  //   font-size: 30%; //1rem = 4.8px, 4.8/16 = 30%
+  // }
+
+  @include respond(big-desktop) {
+    font-size: 75%; //1rem = 12px, 12/16 = 75%
+  }
 }
 
 body {
-  /* font is best handled in the body tag, it is the best practice */
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  /* font-size: 16px; */
-  line-height: 1.7;
-  color: $color-grey-dark;
   /* this is to make a white border around the whole webpage */
   padding: 3rem;
 
   /* prevents padding and borders(not margin) to be added to the total height or width of the box. Thus the element doesn't appear any bigger than it should be */
   box-sizing: border-box;
+
+  //adding media queries to remove white border for smaller screen sizes
+  @include respond(tab-port) {
+    //width <= 900?
+    padding: 0;
+  }
 }

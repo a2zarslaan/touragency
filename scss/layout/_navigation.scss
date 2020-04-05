@@ -23,6 +23,17 @@
     text-align: center;
 
     cursor: pointer;
+
+    //repositioning the menu button to the corner for smaller screens
+    @include respond(tab-port) {
+      top: 4rem;
+      right: 4rem;
+    }
+
+    @include respond(phone) {
+      top: 3.5rem;
+      right: 3.5rem;
+    }
   }
 
   //this will expand to becoem the background of the nav
@@ -49,6 +60,17 @@
 
     //for the transition of the nav popping out. Cubic bezier takes 4 parameters, we can use a site like easings.net to find out the exact values we'd like. We copy the values inside the transition section of our desired effect and paste them here. Can also define custom values on cubic-bezier.com
     transition: transform 0.6s cubic-bezier(0.86, 0, 0.07, 1);
+
+    //repositioning the menu button to the corner for smaller screens
+    @include respond(tab-port) {
+      top: 4.5rem;
+      right: 4.5rem;
+    }
+
+    @include respond(phone) {
+      top: 3.5rem;
+      right: 3.5rem;
+    }
   }
 
   //this is the actual navigation element

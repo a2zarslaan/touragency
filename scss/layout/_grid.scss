@@ -11,6 +11,17 @@
   //here is a good opportunity to use the not keyword, basically, it selects everything except for the elements satisfying the condition passed to it. What we want to achieve though is that the last element should not have a margin-bottom like all other elements, as it doesn't look good that way. So to remove the margin of the last child, generally we would have selected the last child pseudo-class and set the margin-bottom for it to 0. But here we are doing the same thing but the other way round.
   &:not(:last-child) {
     margin-bottom: $gutter-vertical;
+
+    //reducing right margin by using a smaller gutter size for small screens
+    @include respond(tab-port) {
+      margin-bottom: $gutter-vertical-small;
+    }
+  }
+
+  //prevent the columns from taking full width on smaller screens
+  @include respond(tab-port) {
+    max-width: 50rem;
+    padding: 0 2rem;
   }
 
   // [class=]{
@@ -37,6 +48,17 @@
     //adding right margin to all columns (so that gutters are visible), expect for the last child
     &:not(:last-child) {
       margin-right: $gutter-horizontal;
+
+      //removing margin for small screens
+      @include respond(tab-port) {
+        margin-right: 0;
+        margin-bottom: $gutter-vertical-small;
+      }
+    }
+
+    //adding mq to turn columns into single columns for small screens
+    @include respond(tab-port) {
+      width: 100% !important;
     }
   }
 
