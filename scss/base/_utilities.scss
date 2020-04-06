@@ -7,10 +7,20 @@
 //having hardcoded utility classes for margin didn't make sense, like u-margin-bottom-8 and u-margin-bottom-2, because it was equivalent to having inline styles in the tags. So we are using more intuitive names and renaming our utility classes for margin. It was hardcoded in a sense as if we wanted to change it to some other number in the future, we'd also have to change the classnames everywhere
 .u-margin-bottom-big {
   margin-bottom: 8rem !important;
+
+  //reducing the margin-bottom for smaller screens using mq
+  @include respond(tab-port) {
+    padding: 5rem !important;
+  }
 }
 
 .u-margin-bottom-medium {
   margin-bottom: 4rem !important;
+
+  //reducing the margin-bottom for smaller screens using mq
+  @include respond(tab-port) {
+    padding: 3rem !important;
+  }
 }
 
 .u-margin-bottom-small {

@@ -19,6 +19,17 @@
   //}
   //But that method won't work here because in CSS we cannot apply more than one transform at the same element in 2 different places at the same time. But they are working towards improving it. For now, we'll simply add the trnasform skew to the story__text class and just the skew part to the transform
 
+  @include respond(tab-port) {
+    width: 100%;
+    padding: 4rem;
+    padding-left: 7rem;
+  }
+
+  @include respond(phone) {
+    //bringing it back to normal shape by both skewing and translating it to the opposite direction by same amount
+    transform: skewX(0);
+  }
+
   &__shape {
     width: 15rem;
     height: 15rem;
@@ -41,6 +52,10 @@
 
     //for absolute positioning of the figcaption
     position: relative;
+
+    @include respond(phone) {
+      transform: translate(-3rem) skewX(0);
+    }
   }
 
   &__img {
@@ -59,6 +74,10 @@
 
   &__text {
     transform: skewX(12deg);
+
+    @include respond(phone) {
+      transform: skewX(0);
+    }
   }
 
   &__caption {

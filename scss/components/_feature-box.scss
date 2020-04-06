@@ -10,6 +10,10 @@
   //to have a smooth transition for all effects in feature-box
   transition: all 0.2s;
 
+  @include respond(tab-port) {
+    padding: 2rem;
+  }
+
   &__icon {
     //we're using font-size because the icon is basically a font
     font-size: 6rem;
@@ -28,6 +32,10 @@
     -webkit-background-clip: text;
     //now the clipped text would be visible only behind the text, so we'd have to make the text transparent to be able to see the gradient. Here the icons are basically a font, so they will be treated like text everywhere
     color: transparent;
+
+    @include respond(tab-port) {
+      margin: 0;
+    }
   }
 
   &:hover {
