@@ -455,7 +455,14 @@
     <!-- footer -->
     <footer class="footer">
       <div class="footer__logo-box">
-        <img src="img/logo-green-2x.png" alt="Full logo" class="footer__logo">
+        <!-- Art direction example below. Here the picture tag takes the class that ws supposed to be in the img tag before. Then inside picture tag we have to specify a <source> element and also an img tag. Source is a self closing tag. Inside source we can use the srcset tag and actually directly use a CSS media query! Here we'll use the breakpoint of the phone. Now you'll be confused why there are 2 different srcset in the same tag. That is because each srcset has it's own responsive element to it, that is a large and a small image. Here we are using the same image for both srcset, but we could have used a completely different image for the two srcset, and thus implementing art direction where for a specific screen size (<=600px that's written in em here), the first srcset is displayed and for the (>600px) the second srcset is displayed. So in the tag below we're doing both density switching and art direction together -->
+        <picture class="footer__logo">
+          <source srcset="img/logo-green-small-1x.png 1x, img/logo-green-small-2x.png 2x" media="(max-width: 37.5em)">
+          <img srcset ="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x" alt="Full logo">
+        </picture>
+
+        <!-- Density switching example below -->
+        <!-- <img srcset ="img/logo-green-1x.png, 1x img/logo-green-2x.png 2x" alt="Full logo" class="footer__logo"> -->
       </div>
       <div class="row">
         <div class="col-1-of-2">
