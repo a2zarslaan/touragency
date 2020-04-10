@@ -2,26 +2,59 @@
 
 .header {
   /* height of the header should be 95% of the viewport height at all times */
-  height: 95vh;
+  height: 85vh;
   /* two bg images, the first is the linear gradient with color values, the second is the actual bg image */
   background-image: linear-gradient(
       to right bottom,
       rgba($color-primary-light, 0.8),
       rgba($color-primary-dark, 0.8)
     ),
-    url(../img/hero.jpg);
+    url(../img/hero-small.jpg); //small image for low resolution screens
   /* tell the browser that the size of the image is cover so that there is no tiling */
   background-size: cover;
   /* tells the browser what part of the image to keep in the frame when the screen size changes, can be top, bottom and center */
   background-position: top;
 
   /* the slanted triangle at the bottom right of the header can be achieved by using clip-path, which is a new and advanced feature of css. We'll spacify the 4 corners as parameters of the points in the window that we want to keep visible. In the case below we will use vh(viewport height) instead of percentage, so that the height will be adjusted based on the height of the viewport. There is an online solution to create complicated clip paths, check out https://bennettfeely.com/clippy, and just copy paste the parameters of the clip-path property*/
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  //clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 
   //adding webkit property so that clip path can work with most browsers, still won't work with internet explorer and microsoft edge
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  //-webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 
   position: relative;
+
+  //putting clip path here for more universal compatibility
+  @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+    height: 95vh;
+  }
+
+  //responsive images using target resolution media queries. 192dpi is the target resolution here because that is the resolution of MBP retina screen and that is a high resolution screen. That is used as a reference here.
+  @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
+    only screen and (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+    only screen and (min-width: 125em) {
+    //-webkit-min-device-pixel-ratio: 2 is for safari. If we don't include this line this whole logic will be ignored by safari (min-width: 125em) {
+    //600px/16 = 37.5em, 2000px/16 = 125em
+    //most phones are @2x screens, ie high density screens. But their max width is generally 600px. So even if we show a 2x photo on a 600px screen, we'll only need 1200px. So we don't need to show hero.jpg as it is a 2000px screen. In CSS we can use and statement to add to a media query. So we'll add this condition so that the size of the screen is also considered and lower resolution image is shown for mobiles
+    //adding the image for resolution >= 192dpi
+    background-image: linear-gradient(
+        to right bottom,
+        rgba($color-primary-light, 0.8),
+        rgba($color-primary-dark, 0.8)
+      ),
+      url(../img/hero.jpg);
+  }
+
+  //show the high resolution image for screens which are wider than 2000px even if they are low density. We can add this code to the media query above as the content is same but condition is different using a comma (,). So in CSS "and" keyword is like and statement and comma(",") is like or statement
+  // @media (min-width: 2000px) {
+  //   background-image: linear-gradient(
+  //     to right bottom,
+  //     rgba($color-primary-light, 0.8),
+  //     rgba($color-primary-dark, 0.8)
+  //   ),
+  //   url(../img/hero.jpg);
+  // }
 
   //reducing the slope of the clip path slanted triangle effect for smaller screens
   @include respond(phone) {

@@ -26,6 +26,7 @@
     width: 100%;
 
     //also, using the properties above the cards overlap but their backs are visible even after rotation. This is the first time we're actually using this property th eway it is meant to be used, this time it is not fixing an animaton, it will hide the back part of the card
+    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 
     //giving round edges and shadows
@@ -240,7 +241,10 @@
   }
 
   //mq for redesigning the card for smaller screens
-  @include respond(tab-port) {
+  //respond is not a complete media query so we cannot add more than one condition to it. We want to check here whether our device supports hover feature, so we'll have to use a real media query here.
+  //@include respond(tab-port) {
+
+  @media only screen and (max-width: 56.25em), only screen and (hover: none) {
     height: auto;
     border-radius: 3px;
     background-color: $color-white;

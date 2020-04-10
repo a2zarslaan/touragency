@@ -39,9 +39,10 @@
 
     //to make the text to the right of the circle to wrap around the circle, we'll use the shape outside property. When using this property, we don't even have to have the shape as circle, but the text will still wrap around a circular shape if we use this property
     //here we can define the size and center of the shape, first parameter is the radius with regard to the element, second and third parameters are the center coordinates in X and Y axis, which in the following case are equal. Also, it is a pretty demanding property. It only works if the element has a defined width, height, and is a floating element.
-    shape-outside: circle(50% at 50% 50%);
+    //shape-outside: circle(50% at 50% 50%);
     //for the above effect to work in safari, we'll need to use webkit. Also, it doesn't work in firefox, internet explorer and microsoft edge.
-    -webkit-shape-outside: circle(50% at 50% 50%);
+    //-webkit-shape-outside: circle(50% at 50% 50%);
+    //putting the above properties in future query
 
     //to put a circle shape there, we'll use clip path. The definition of the shape will be exactly as the shape outside proeprty
     clip-path: circle(50% at 50% 50%);
@@ -52,6 +53,20 @@
 
     //for absolute positioning of the figcaption
     position: relative;
+
+    //for unsupported devices, the image will look like a square
+    overflow: hidden;
+
+    //make the images look round, using graceful degradation
+    border-radius: 50%;
+
+    //putting clip path here for more universal compatibility
+    @supports (clip-path: polygon(0 0)) or (-webkit-clip-path: polygon(0 0)) {
+      clip-path: circle(50% at 50% 50%);
+      -webkit-clip-path: circle(50% at 50% 50%);
+      shape-outside: circle(50% at 50% 50%);
+      -webkit-shape-outside: circle(50% at 50% 50%);
+    }
 
     @include respond(phone) {
       transform: translate(-3rem) skewX(0);

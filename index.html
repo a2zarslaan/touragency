@@ -10,7 +10,7 @@
     />
 
     <!-- importing icon-font css stylesheet in the project -->
-    <link rel="stylesheet" href="css/icon-font.css" />
+    <!-- <link rel="stylesheet" href="css/icon-font.css" /> Don't need icon font here now as we added it to our css later using NPM tasks. This line needs to be commented out only before the production task is run, as we add the icon-font to css only then. For development, this needs to be included here just like we had it before as there is no reference to icon fonts in CSS during development-->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
 
@@ -162,9 +162,32 @@
           <div class="col-1-of-2">
             <!-- creating a new partial in components called composition to style the following -->
             <div class="composition">
+              <!-- We're implementing resolution switching here. Instead of density descriptors we'll use width descriptors, 300w means 300 pixel width. Sizes attribute informs the browser about the approximate width of the image for different viewport width. We'll use all our breakpoints here. (max-width: 900px) 20vw means that for upto 900px wide screen, our image will have 20% of the viewport width, similarly for next attribute. 300px is the default value if nothing else works. Also, we supply an src tag in the end just in case the user opens the website using an older browser which doesn't recognise these newer tags  
+              
+              900px/16 = 56.25em, 600/16 = 37.5em, 300px/16 = 18.75em-->
+               <img srcset="img/nat-1.jpg 300w, img/nat-1-large.jpg 1000w" 
+               sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 18.75em"
+               alt = "Photo 1"
+               class="composition__photo composition__photo--p1"
+               src="img/nat-1-large.jpg">
+
+               <img srcset="img/nat-2.jpg 300w, img/nat-2-large.jpg 1000w" 
+               sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 18.75em"
+               alt = "Photo 2"
+               class="composition__photo composition__photo--p2"
+               src="img/nat-2-large.jpg">
+
+               <img srcset="img/nat-3.jpg 300w, img/nat-3-large.jpg 1000w" 
+               sizes="(max-width: 56.25em) 20vw, (max-width: 37.5em) 30vw, 18.75em"
+               alt = "Photo 3"
+               class="composition__photo composition__photo--p3"
+               src="img/nat-3-large.jpg">
+
+               <!--  older code for these 3 images above
               <img src="img/nat-1-large.jpg" alt="Photo 1" class="composition__photo composition__photo--p1">
               <img src="img/nat-2-large.jpg" alt="Photo 2" class="composition__photo composition__photo--p2">
               <img src="img/nat-3-large.jpg" alt="Photo 3" class="composition__photo composition__photo--p3">
+              -->
             </div>
           </div>
         </div>
@@ -458,7 +481,7 @@
         <!-- Art direction example below. Here the picture tag takes the class that ws supposed to be in the img tag before. Then inside picture tag we have to specify a <source> element and also an img tag. Source is a self closing tag. Inside source we can use the srcset tag and actually directly use a CSS media query! Here we'll use the breakpoint of the phone. Now you'll be confused why there are 2 different srcset in the same tag. That is because each srcset has it's own responsive element to it, that is a large and a small image. Here we are using the same image for both srcset, but we could have used a completely different image for the two srcset, and thus implementing art direction where for a specific screen size (<=600px that's written in em here), the first srcset is displayed and for the (>600px) the second srcset is displayed. So in the tag below we're doing both density switching and art direction together -->
         <picture class="footer__logo">
           <source srcset="img/logo-green-small-1x.png 1x, img/logo-green-small-2x.png 2x" media="(max-width: 37.5em)">
-          <img srcset ="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x" alt="Full logo">
+          <img srcset ="img/logo-green-1x.png 1x, img/logo-green-2x.png 2x" alt="Full logo" src="img/logo-green-2x.png">
         </picture>
 
         <!-- Density switching example below -->
