@@ -1,4 +1,4 @@
-# Tour Agency
+# Tour Agency Concept Website
 This project aims at developing a responsive e-commerce website of a tour company from scratch, using SASS. It is a concept project, and uses no CSS libraries for any aspect of the project, from grid system to the animations. The whole layout and animations are developed using inbuilt features of CSS.
 
 ## Motivation
